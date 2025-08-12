@@ -12,7 +12,7 @@
     <h1 class="display-1">Erro</h1>
     <h2>Oops! Algo deu errado.</h2>
     <p class="lead">Ocorreu um erro inesperado. Tente novamente mais tarde.</p>
-    <a href="<c:url value='/'/>" class="btn btn-primary">Voltar para a Home</a>
+    <a href="<c:url value='/'/>" class="btn btn-dark">Voltar para a Home</a>
 </div>
 </body>
 </html>

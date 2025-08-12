@@ -19,7 +19,16 @@ public class PageErrorController implements ErrorController{
             if(statusCode == HttpStatus.NOT_FOUND.value()) {
                 return "error/error-404";
             }
+            else if(statusCode == HttpStatus.FORBIDDEN.value()) {
+                return "error/error-403";
+            }
         }
-        return "error/error-403";
+
+        String statusParam = request.getParameter("status");
+        if ("403".equals(statusParam)) {
+            return "error/error-403"; //
+        }
+
+        return "error/error";
     }
 }

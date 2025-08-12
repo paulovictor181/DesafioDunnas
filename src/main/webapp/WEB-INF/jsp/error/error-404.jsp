@@ -12,7 +12,7 @@
     <h1 class="display-1">404</h1>
     <h2>Página Não Encontrada</h2>
     <p class="lead">Desculpe, a página que você está procurando não existe.</p>
-    <a href="<c:url value='/'/>" class="btn btn-primary">Voltar para a Home</a>
+    <a href="<c:url value='/'/>" class="btn btn-dark">Voltar para a Home</a>
 </div>
 </body>
 </html>

@@ -41,19 +41,18 @@ public class UsuarioService {
         novoUsuario.setTipo(tipo);
         usuarioRepository.save(novoUsuario);
 
-        // 2. Verifica o tipo e cria o registro correspondente
         if (tipo == TipoUsuario.CLIENTE) {
             Cliente novoCliente = new Cliente();
             novoCliente.setNome(nome);
             novoCliente.setCpf(cpf);
             novoCliente.setDataNascimento(dataNascimento);
-            novoCliente.setUsuario(novoUsuario); // Associa ao usuário recém-criado
+            novoCliente.setUsuario(novoUsuario);
             clienteRepository.save(novoCliente);
         } else if (tipo == TipoUsuario.FORNECEDOR) {
             Fornecedor novoFornecedor = new Fornecedor();
             novoFornecedor.setNome(nomeFornecedor);
             novoFornecedor.setCnpj(cnpj);
-            novoFornecedor.setUsuario(novoUsuario); // Associa ao usuário recém-criado
+            novoFornecedor.setUsuario(novoUsuario);
             fornecedorRepository.save(novoFornecedor);
         }
     }

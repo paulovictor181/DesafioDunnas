@@ -12,7 +12,7 @@
     <h1 class="display-1">403</h1>
     <h2>Acesso Negado</h2>
     <p class="lead">Você não tem permissão para acessar esta página.</p>
-    <a href="<c:url value='/'/>" class="btn btn-primary">Voltar para a Home</a>
+    <a href="<c:url value='/'/>" class="btn btn-dark">Voltar para a Home</a>
 </div>
 </body>
 </html>
