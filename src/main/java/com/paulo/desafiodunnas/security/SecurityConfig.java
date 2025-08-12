@@ -1,5 +1,6 @@
 package com.paulo.desafiodunnas.security;
 
+import com.paulo.desafiodunnas.config.LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,33 +20,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/login", "/registrar", "/css/**","/WEB-INF/jsp/**").permitAll() // Rotas públicas
-                        .requestMatchers("/pedidos/**").hasRole("CLIENTE") // Rotas de cliente
-                        .requestMatchers("/meus-produtos/**").hasRole("FORNECEDOR") // Rotas de fornecedor
+                        .requestMatchers("/login", "/registrar", "/css/**","/webjars/**","/WEB-INF/jsp/**","/error/**").permitAll() // Rotas públicas
+                        .requestMatchers("/cliente/**").hasRole("CLIENTE") // Rotas de cliente
+                        .requestMatchers("/fornecedor/**").hasRole("FORNECEDOR") // Rotas de fornecedor
+                        .requestMatchers("/admin/**").hasRole("ADMIN") // Rotas de admin
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.loginPage("/login").permitAll())
-                .logout(logout -> logout.permitAll());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .successHandler(new LoginSuccessHandler())
+                        .permitAll())
+                .logout(logout -> logout.permitAll())
+                .exceptionHandling(exceptions -> exceptions
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.sendRedirect(request.getContextPath() + "/error?status=403");
+                        })
+                );
 
         return http.build();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails cliente = User.builder()
-                .username("cliente1")
-                .password(passwordEncoder().encode("senha123"))
-                .roles("CLIENTE")
-                .build();
-
-        UserDetails fornecedor = User.builder()
-                .username("fornecedor1")
-                .password(passwordEncoder().encode("senha123"))
-                .roles("FORNECEDOR")
-                .build();
-
-        return new InMemoryUserDetailsManager(cliente, fornecedor);
     }
 
     @Bean
