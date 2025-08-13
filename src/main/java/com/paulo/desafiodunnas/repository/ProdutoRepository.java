@@ -11,7 +11,8 @@ import java.util.List;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     List<Produto> findByFornecedorId(Long fornecedorId);
 
-    @Query(value = "SELECT * FROM produtos p WHERE p.fornecedor_id = :fornecedorId AND " +
+    @Query(value = "SELECT * FROM produtos p WHERE p.fornecedor_id = :fornecedorId AND p.status = 'ATIVO' AND " +
             "(:nome IS NULL OR p.nome ILIKE CONCAT('%', :nome, '%'))",
-            nativeQuery = true)    List<Produto> findByFornecedorIdAndNome(Long fornecedorId, String nome);
+            nativeQuery = true)
+    List<Produto> findByFornecedorIdAndNome(Long fornecedorId, String nome);
 }

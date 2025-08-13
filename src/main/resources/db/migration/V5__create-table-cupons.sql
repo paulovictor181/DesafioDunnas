@@ -1,0 +1,6 @@
+CREATE TABLE cupons (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(40) NOT NULL,
+    valor NUMERIC(10, 2) NOT NULL,
+    tipo VARCHAR(20) NOT NULL
+);

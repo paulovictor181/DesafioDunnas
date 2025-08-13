@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,6 +10,8 @@
     <link href="<c:url value="/webjars/bootstrap/5.3.7/css/bootstrap.min.css"/>" rel="stylesheet">
 </head>
 <body>
+
+<jsp:include page="components/navbar.jsp"/>
 
 <div class="modal fade" id="modalAdicionarProduto" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -44,9 +47,6 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Meus Produtos</h1>
-        <form action="<c:url value='/logout'/>" method="post">
-            <button type="submit" class="btn btn-danger">Sair</button>
-        </form>
     </div>
 
     <c:if test="${not empty sucesso}">
@@ -86,7 +86,10 @@
                         <td>${produto.id}</td>
                         <td>${produto.nome}</td>
                         <td>${produto.descricao}</td>
-                        <td>${produto.preco}</td>
+                        <td>
+                            <fmt:setLocale value="pt-BR"/>
+                            <fmt:formatNumber value="${produto.preco}" type="currency"/>
+                        </td>
                     </tr>
                 </c:forEach>
                 <c:if test="${empty produtos}">

@@ -8,17 +8,17 @@
     <link href="<c:url value="/webjars/bootstrap/5.3.7/css/bootstrap.min.css"/>" rel="stylesheet">
 </head>
 <body>
+
+<jsp:include page="components/navbar.jsp"/>
+
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Usuários Cadastrados</h1>
-        <form action="<c:url value='/logout'/>" method="post">
-            <button type="submit" class="btn btn-danger">Sair</button>
-        </form>
     </div>
     <form action="<c:url value='/admin/home'/>" method="get" class="mb-3">
         <div class="input-group">
             <input type="text" name="filtro" class="form-control" placeholder="Filtrar por nome de usuário..." value="${filtro}">
-            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <button type="submit" class="btn btn-dark">Filtrar</button>
         </div>
     </form>
 

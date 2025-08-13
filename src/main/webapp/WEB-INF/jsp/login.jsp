@@ -12,7 +12,10 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4">
-            <h1 class="text-center mb-4">Login</h1>
+
+            <div class="d-flex justify-content-center align-items-center py-4 mb-4">
+                <img src="https://www.dunnastecnologia.com.br/img/logo-dark.png" alt="Logo Dunnas">
+            </div>
 
             <c:if test="${param.error}">
                 <div class="alert alert-danger">

@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-dark">Registrar</button>
                 </div>
             </form>
             <div class="text-center mt-3">

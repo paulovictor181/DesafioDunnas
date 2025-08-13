@@ -1,5 +1,6 @@
 package com.paulo.desafiodunnas.model;
 
+import com.paulo.desafiodunnas.enums.StatusProduto;
 import com.paulo.desafiodunnas.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,4 +34,8 @@ public class Produto {
     @JoinColumn(name = "fornecedor_id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_fornecedor"))
     private Fornecedor fornecedor;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private StatusProduto status = StatusProduto.ATIVO;
 }
