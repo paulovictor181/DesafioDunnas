@@ -6,6 +6,7 @@ import com.paulo.desafiodunnas.repository.FornecedorRepository;
 import com.paulo.desafiodunnas.repository.ProdutoRepository;
 import com.paulo.desafiodunnas.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,8 +91,22 @@ public class PedidoController {
             pedidoService.pagarPedido(pedidoId, cliente);
             redirectAttributes.addFlashAttribute("sucesso", "Pedido #" + pedidoId + " pago com sucesso!");
 
+        } catch (DataAccessException e) {
+            String userFriendlyMessage = "Erro ao pagar pedido.";
+            Throwable rootCause = e.getRootCause();
+            if (rootCause != null && rootCause.getMessage() != null) {
+                String fullMessage = rootCause.getMessage();
+                int ondeIndex = fullMessage.indexOf("Onde:");
+                if (ondeIndex != -1) {
+                    userFriendlyMessage = fullMessage.substring(0, ondeIndex).trim();
+                } else {
+                    userFriendlyMessage = fullMessage;
+                }
+            }
+            redirectAttributes.addFlashAttribute("erro", userFriendlyMessage);
+
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("erro", "Erro ao pagar pedido: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("erro", "Erro inesperado: " + e.getMessage());
         }
 
         return "redirect:/cliente/home";

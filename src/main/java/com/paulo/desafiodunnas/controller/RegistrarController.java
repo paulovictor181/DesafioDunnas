@@ -36,7 +36,6 @@ public class RegistrarController {
     public String processarRegistro(@RequestParam String usuario,
                                     @RequestParam String senha,
                                     @RequestParam TipoUsuario tipo,
-                                    // Parâmetros opcionais do formulário
                                     @RequestParam(required = false) String nome,
                                     @RequestParam(required = false) String cpf,
                                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataNascimento,
@@ -49,7 +48,7 @@ public class RegistrarController {
             redirectAttributes.addFlashAttribute("mensagem", "Usuário registrado com sucesso! Faça o login.");
             return "redirect:/login";
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("erro", e.getMessage());
+            redirectAttributes.addFlashAttribute("erro", "Falha em registrar o usuário");
             return "redirect:/registrar";
         }
     }

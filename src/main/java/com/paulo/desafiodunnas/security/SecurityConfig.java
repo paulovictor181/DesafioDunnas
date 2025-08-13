@@ -30,6 +30,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .failureUrl("/login?error")
                         .successHandler(new LoginSuccessHandler())
                         .permitAll())
                 .logout(logout -> logout.permitAll())

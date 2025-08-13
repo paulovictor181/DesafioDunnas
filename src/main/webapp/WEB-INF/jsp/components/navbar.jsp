@@ -36,7 +36,7 @@
                 <%-- Links do Admin --%>
                 <sec:authorize access="hasRole('ADMIN')">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value='/admin/home'/>">Dashboard</a>
+                        <a class="nav-link" href="<c:url value='/admin/home'/>">Usuários</a>
                     </li>
                 </sec:authorize>
             </ul>
